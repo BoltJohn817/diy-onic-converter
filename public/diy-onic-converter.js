@@ -1,4 +1,40 @@
 const PREFIX_LENGTH = 3;
+const BLOCK_TAGS = [
+  'address',
+  'article',
+  'aside',
+  'blockquote',
+  'canvas',
+  'dd',
+  'div',
+  'dl',
+  'dt',
+  'fieldset',
+  'figcaption',
+  'figure',
+  'footer',
+  'form',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'header',
+  'hr',
+  'li',
+  'main',
+  'nav',
+  'noscript',
+  'ol',
+  'p',
+  'pre',
+  'section',
+  'table',
+  'tfoot',
+  'ul',
+  'video',
+];
 
 /**
  * Create a DIY-onic element with static prefix length. The text parameter may not contains space.
@@ -40,12 +76,12 @@ const processTag = (tag) => {
 };
 
 /**
- * Process the given container by selecting all paragraphs and process paragraphs one by one.
+ * Process the given container by selecting all elements and process paragraphs one by one.
  *
  * @param {HTMLElement} container - The container element to process.
  */
 const processContainer = (container) => {
-  const paragraphs = container.querySelectorAll('p');
+  const paragraphs = [...container.children];
 
   paragraphs.forEach(processTag);
 };
