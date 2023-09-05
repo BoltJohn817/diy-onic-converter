@@ -40,7 +40,7 @@ const BLOCK_TAGS = [
  * Create a DIY-onic element with static prefix length. The text parameter may not contains space.
  *
  * @param {string} text
- * @returns HTMLSpanElement
+ * @returns {HTMLSpanElement}
  * @example
  *  createDIYOnicElement('TestAlphaBet')
  *  => <span class="diyonic"><b>Tes</b>tAlphaBet</span>
@@ -78,19 +78,35 @@ const processTag = (tag) => {
 /**
  * Process the given container by selecting all elements and process paragraphs one by one.
  *
- * @param {HTMLElement} container - The container element to process.
+ * @param {Node} container - The container element to process.
+ * @returns {Node} - Newly created node to be used for replacement. 
  */
 const processContainer = (container) => {
-  const paragraphs = [...container.children];
+  const nodes = container.childNodes;
 
-  paragraphs.forEach(processTag);
+  const resultElements = [];
+
+  nodes.forEach((node) => {
+    if (node.childNodes.length === 0) {
+      console.log(node.textContent);
+      resultElements.push(...processText(node));
+    } else {
+      resultElements.push(processContainer(node));
+    }
+  });
+
+  const newNode = container.cloneNode();
+
+  resultElements.forEach((element) => newNode.appendChild(element));
+  return newNode;
 };
 
 const diyOnicConverter = (textContentContainerSelector) => {
   const container = document.querySelector(textContentContainerSelector);
   console.log('Performing bionic reading conversion on:', container);
 
-  processContainer(container);
+  const updateContainer = processContainer(container);
+  container.parentNode.replaceChild(updateContainer, container);
 };
 // Allow global access so that this can be executed from the console.
 window.diyOnicConverter = diyOnicConverter;
