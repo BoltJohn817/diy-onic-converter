@@ -85,7 +85,6 @@ const processContainer = (container) => {
 
   nodes.forEach((node) => {
     if (node.childNodes.length === 0) {
-      console.log(node.textContent);
       resultElements.push(...processText(node));
     } else {
       resultElements.push(processContainer(node));
