@@ -62,17 +62,14 @@ const createDIYOnicElement = (text) => {
 };
 
 /**
- * Process the container by selecting all paragraphs and applying a createDIYOnicElement to each paragraph.
+ * Process the text node by selecting all words and applying a createDIYOnicElement to each word.
  *
  * @param {HTMLElement} container - The container element to process.
+ * @returns Array<HTMLSpanElement>
  */
-const processTag = (tag) => {
+const processText = (tag) => {
   const words = tag.textContent.split(' ');
-
-  tag.innerHTML = '';
-  words.forEach((word) => {
-    tag.appendChild(createDIYOnicElement(word));
-  });
+  return words.map(createDIYOnicElement);
 };
 
 /**
