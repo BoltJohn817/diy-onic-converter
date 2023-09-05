@@ -1,20 +1,14 @@
-const diyOnicConverter = (textContentContainerSelector) => {
-  const container = document.querySelector(textContentContainerSelector);
-  console.log('Performing bionic reading conversion on:', container);
-
-  processContainer(container);
-};
+const PREFIX_LENGTH = 3;
 
 /**
  * Create a DIY-onic element with static prefix length. The text parameter may not contains space.
- * 
+ *
  * @param {string} text
  * @returns HTMLSpanElement
  * @example
  *  createDIYOnicElement('TestAlphaBet')
  *  => <span class="diyonic"><b>Tes</b>tAlphaBet</span>
  */
-const PREFIX_LENGTH = 3;
 
 const createDIYOnicElement = (text) => {
   const normalText = text.substring(PREFIX_LENGTH);
@@ -56,5 +50,11 @@ const processContainer = (container) => {
   paragraphs.forEach(processTag);
 };
 
+const diyOnicConverter = (textContentContainerSelector) => {
+  const container = document.querySelector(textContentContainerSelector);
+  console.log('Performing bionic reading conversion on:', container);
+
+  processContainer(container);
+};
 // Allow global access so that this can be executed from the console.
 window.diyOnicConverter = diyOnicConverter;
