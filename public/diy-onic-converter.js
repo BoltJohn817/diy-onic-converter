@@ -68,7 +68,7 @@ const createDIYOnicElement = (text) => {
  * @returns Array<HTMLSpanElement>
  */
 const processText = (tag) => {
-  const words = tag.textContent.split(' ');
+  const words = tag.textContent.split(' ').filter(i => i.trim());
   return words.map(createDIYOnicElement);
 };
 
